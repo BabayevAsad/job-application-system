@@ -11,6 +11,7 @@ import com.AsadBabayev.services.CompanyService;
 
 @RestController
 @RequestMapping("/rest/api/company")
+@CrossOrigin(origins = "*")
 public class CompanyControllerImpl implements CompanyController {
 
     private final CompanyService companyService;

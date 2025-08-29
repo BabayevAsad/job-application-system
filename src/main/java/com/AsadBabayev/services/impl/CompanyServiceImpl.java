@@ -42,7 +42,8 @@ public class CompanyServiceImpl implements CompanyService {
                 jobActionDtoList.add(jobActionDto);
             });
 
-            companyDto.setDtoJobs(jobActionDtoList);
+            companyDto.setJobActionDtoList(jobActionDtoList);
+
 
             companyDtoList.add(companyDto);
         }
@@ -66,7 +67,7 @@ public class CompanyServiceImpl implements CompanyService {
                 jobActionDtoList.add(jobActionDto);
             });
 
-            response.setDtoJobs(jobActionDtoList);
+            response.setJobActionDtoList(jobActionDtoList);
 
             BeanUtils.copyProperties(dbCompany, response);
             return response;
