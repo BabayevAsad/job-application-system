@@ -1,7 +1,8 @@
 ## 💼 Job Application System Project 🌐📄🏢🧑‍💼👩‍💻
 
 📝 About Project The Job Application System is a RESTful API built with Spring Boot to efficiently manage Jobs, Job Seekers, Companies, and Job Applications. It provides full CRUD operations for all entities and follows the Model-View-Controller (MVC) architectural pattern.
-The system is designed to simplify the process of job postings and applications. Companies can publish jobs, and job seekers can apply to them. It uses robust entity relationships and is structured to be clean, modular, and scalable.
+The system is designed to simplify the process of job postings and applications. Companies can publish jobs, and job seekers can apply to them. It uses robust entity relationships and is structured to be clean, modular, and scalable. 
+Security is integrated using **Spring Security with JWT Authentication**, enabling secure login and role-based access control (RBAC).
 
 ## 🚀 Features
 
@@ -35,9 +36,9 @@ The system is designed to simplify the process of job postings and applications.
 - One-to-Many:
 - Company → Jobs
 
-### 🔐 Authentication & Authorization (will be improved)
+### 🔐 Authentication & Authorization
 - Secured endpoints using JWT Tokens.
-- Supports basic Role-Based Access Control (RBAC) between Admin, JobSeeker, and Company roles.
+- Supports Role-Based Access Control (RBAC) between Admin, User, and Manager roles.
 
 
 ### 🧪 Validation & Exception Handling
@@ -54,7 +55,7 @@ The system is designed to simplify the process of job postings and applications.
 
 - Java + Spring Boot
 - Spring Data JPA + Hibernate
-- Spring Security + JWT Authentication (will be applied later)
+- Spring Security + JWT Authentication 
 - PostgreSQL (or MySQL – configurable)
 - Lombok for reducing boilerplate
 - Maven for build automation
@@ -65,9 +66,9 @@ The system is designed to simplify the process of job postings and applications.
 
 ## 🔧 Planned Improvements
 ### 🧠 Add caching mechanisms to boost performance
-### 🔒 Improve security and role-based permissions
 ### 🐞 Fix minor gaps in job deletion, application logic, and error handling
 ### 🧹 Refactor and optimize code for better readability and maintainability
+### ⚛️ Add frontend (React) in a short time
 
 
 ## 🐛 Found a Bug?
