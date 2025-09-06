@@ -54,7 +54,7 @@ Security is integrated using **Spring Security with JWT Authentication**, enabli
 - Dockerfile: Defines how to build the Spring Boot application image.
 - docker-compose.yml: Orchestrates running the Spring Boot app together with a PostgreSQL database container.
 
-###🧪 Testing & CI/CD
+### 🧪 Testing & CI/CD
 
 Unit Tests:
 
