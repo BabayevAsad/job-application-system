@@ -50,6 +50,10 @@ Security is integrated using **Spring Security with JWT Authentication**, enabli
 - Uses Spring Boot’s automatic migration from application properties.
 - Schema generation and updates handled via JPA/Hibernate configuration.
 
+### 🐳 Docker Support
+- Dockerfile: Defines how to build the Spring Boot application image.
+- docker-compose.yml: Orchestrates running the Spring Boot app together with a PostgreSQL database container.
+
 
 ### 🛠️ Technologies Used
 
@@ -61,7 +65,7 @@ Security is integrated using **Spring Security with JWT Authentication**, enabli
 - Maven for build automation
 - MapStruct for DTO mapping
 - Spring Validation API
-- Docker (will be applied later)
+- Docker & Docker Compose
 
 
 ## 🔧 Planned Improvements
