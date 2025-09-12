@@ -1,4 +1,4 @@
-package com.AsadBabayev.repostory;
+package com.AsadBabayev.repository;
 
 import com.AsadBabayev.entities.JobSeeker;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -3,7 +3,7 @@ package com.AsadBabayev.services.impl;
 import com.AsadBabayev.dto.JobSeeker.JobSeekerDto;
 import com.AsadBabayev.dto.JobSeeker.JobSeekerRequestDto;
 import com.AsadBabayev.entities.JobSeeker;
-import com.AsadBabayev.repostory.JobSeekerRepository;
+import com.AsadBabayev.repository.JobSeekerRepository;
 import com.AsadBabayev.services.JobSeekerService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;

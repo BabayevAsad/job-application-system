@@ -3,7 +3,7 @@ package com.AsadBabayev.controller.impl;
 import com.AsadBabayev.auth.TokenManager;
 import com.AsadBabayev.entities.Role;
 import com.AsadBabayev.entities.User;
-import com.AsadBabayev.repostory.UserRepository;
+import com.AsadBabayev.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
