@@ -120,5 +120,7 @@
 				<version>3.5.3</version>
 			</plugin>
 		</plugins>
+
+		<finalName>job-application-system</finalName>
 	</build>
 </project>
