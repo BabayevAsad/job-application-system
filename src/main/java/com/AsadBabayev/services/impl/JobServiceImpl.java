@@ -9,6 +9,10 @@ import com.AsadBabayev.repository.CompanyRepository;
 import com.AsadBabayev.repository.JobRepository;
 import com.AsadBabayev.services.JobService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,6 +31,7 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
+    @Cacheable(value = "jobs", key = "'all'")
     public List<JobDto> getAllJob() {
         List<JobDto> jobDtoList = new ArrayList<>();
         List<Job> jobList = repository.findAll();
@@ -48,6 +53,7 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
+    @Cacheable(value = "jobs", key = "#id")
     public JobDto getJobById(int id) {
         Optional<Job> optional = repository.findById(id);
 
@@ -72,6 +78,8 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
+    @CachePut(value = "jobs", key = "#result.id")
+    @CacheEvict(value = "jobs", key = "'all'")
     public JobDto saveJob(JobRequestDto jobRequestDto) {
         Job job = new Job();
 
@@ -95,6 +103,8 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
+    @CachePut(value = "jobs", key = "#result.id")
+    @CacheEvict(value = "jobs", key = "'all'")
     public JobDto updateJob(JobRequestDto jobRequestDto, int id) {
         Optional<Job> optional = repository.findById(id);
 
@@ -123,6 +133,10 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
+    @Caching(evict = {
+            @CacheEvict(value = "jobs", key = "#id"),
+            @CacheEvict(value = "jobs", key = "'all'")
+    })
     public void deleteJob(int id) {
         repository.deleteById(id);
     }

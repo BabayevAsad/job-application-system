@@ -6,6 +6,10 @@ import com.AsadBabayev.entities.JobSeeker;
 import com.AsadBabayev.repository.JobSeekerRepository;
 import com.AsadBabayev.services.JobSeekerService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,6 +26,7 @@ public class JobSeekerServiceImpl implements JobSeekerService {
     }
 
     @Override
+    @Cacheable(value = "jobSeekers", key = "'all'")
     public List<JobSeekerDto> getAllJobSeeker() {
         List<JobSeekerDto> list = new ArrayList<>();
         List<JobSeeker> jobSeekerList = jobSeekerRepository.findAll();
@@ -36,6 +41,7 @@ public class JobSeekerServiceImpl implements JobSeekerService {
     }
 
     @Override
+    @Cacheable(value = "jobSeekers", key = "#id")
     public JobSeekerDto getJobSeekerById(int id) {
         Optional<JobSeeker> optional = jobSeekerRepository.findById(id);
 
@@ -50,6 +56,8 @@ public class JobSeekerServiceImpl implements JobSeekerService {
     }
 
     @Override
+    @CachePut(value = "jobSeekers", key = "#result.id")
+    @CacheEvict(value = "jobSeekers", key = "'all'")
     public JobSeekerDto saveJobSeeker(JobSeekerRequestDto jobSeekerRequestDto) {
         JobSeeker jobSeeker = new JobSeeker();
 
@@ -63,6 +71,8 @@ public class JobSeekerServiceImpl implements JobSeekerService {
     }
 
     @Override
+    @CachePut(value = "jobSeekers", key = "#result.id")
+    @CacheEvict(value = "jobSeekers", key = "'all'")
     public JobSeekerDto updateJobSeeker(int id, JobSeekerRequestDto jobSeekerRequestDto) {
         Optional<JobSeeker> optional = jobSeekerRepository.findById(id);
 
@@ -92,6 +102,10 @@ public class JobSeekerServiceImpl implements JobSeekerService {
     }
 
     @Override
+    @Caching(evict = {
+            @CacheEvict(value = "jobSeekers", key = "#id"),
+            @CacheEvict(value = "jobSeekers", key = "'all'")
+    })
     public void deleteJobSeekerById(int id) {
         jobSeekerRepository.deleteById(id);
     }

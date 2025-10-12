@@ -8,6 +8,10 @@ import com.AsadBabayev.repository.CompanyRepository;
 import com.AsadBabayev.repository.JobRepository;
 import com.AsadBabayev.services.CompanyService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,6 +30,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
+    @Cacheable(value = "companies", key = "'all'")
     public List<CompanyDto> getAllCompany() {
         List<CompanyDto> companyDtoList = new ArrayList<>();
         List<Company> companyList = repository.findAll();
@@ -52,6 +57,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
+    @Cacheable(value = "companies", key = "#id")
     public CompanyDto getCompanyById(int id) {
         Optional<Company> optional = repository.findById(id);
 
@@ -77,6 +83,8 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
+    @CachePut(value = "companies",key ="#result.id" )
+    @CacheEvict(value = "companies", key = "'all'")
     public CompanyDto saveCompany(CompanyRequestDto companyRequestDto) {
         Company company = new Company();
 
@@ -90,6 +98,8 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
+    @CachePut(value = "companies", key = "#result.id")
+    @CacheEvict(value = "companies", key = "'all'")
     public CompanyDto updateCompany(CompanyRequestDto companyRequestDto, int id) {
         Optional<Company> optional = repository.findById(id);
 
@@ -108,6 +118,10 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
+    @Caching(evict = {
+            @CacheEvict(value = "companies", key = "#id"),
+            @CacheEvict(value = "companies", key = "'all'")
+    })
     public void deleteCompany(int id) {
         repository.deleteById(id);
     }

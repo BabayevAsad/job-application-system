@@ -14,6 +14,10 @@ import com.AsadBabayev.services.JobApplicationService;
 import com.AsadBabayev.services.JobSeekerService;
 import com.AsadBabayev.services.JobService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -43,6 +47,7 @@ public class JobApplicationServiceImpl implements JobApplicationService {
     }
 
     @Override
+    @Cacheable(value = "jobApplications", key = "'all'")
     public List<JobApplicationDto> getAllJobApplication() {
         List<JobApplication> jobApplicationList = applicationRepository.findAll();
         List<JobApplicationDto> jobApplicationDtoList = new ArrayList<>();
@@ -65,6 +70,7 @@ public class JobApplicationServiceImpl implements JobApplicationService {
     }
 
     @Override
+    @Cacheable(value = "jobApplications", key = "#id")
     public JobApplicationDto getJobApplicationById(int id) {
         Optional<JobApplication> optional = applicationRepository.findById(id);
 
@@ -88,6 +94,8 @@ public class JobApplicationServiceImpl implements JobApplicationService {
     }
 
     @Override
+    @CachePut(value = "jobApplications", key = "#result.id")
+    @CacheEvict(value = "jobApplications", key = "'all'")
     public JobApplicationDto saveJobApplication(JobApplicationRequestDto jobApplicationRequestDto) {
         JobApplication dbJobApplication = new JobApplication();
 
@@ -123,6 +131,8 @@ public class JobApplicationServiceImpl implements JobApplicationService {
     }
 
     @Override
+    @CachePut(value = "jobApplications", key = "#result.id")
+    @CacheEvict(value = "jobApplications", key = "'all'")
     public JobApplicationDto updateJobApplication(JobApplicationRequestDto jobApplicationRequestDto, int id) {
         Optional<JobApplication> optional = applicationRepository.findById(id);
 
@@ -156,6 +166,10 @@ public class JobApplicationServiceImpl implements JobApplicationService {
     }
 
     @Override
+    @Caching(evict = {
+            @CacheEvict(value = "jobApplications", key = "#id"),
+            @CacheEvict(value = "jobApplications", key = "'all'")
+    })
     public void deleteJobApplicationById(int id) {
         applicationRepository.deleteById(id);
     }
