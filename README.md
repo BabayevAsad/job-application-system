@@ -54,6 +54,10 @@ Security is integrated using **Spring Security with JWT Authentication**, enabli
 - Dockerfile: Defines how to build the Spring Boot application image.
 - docker-compose.yml: Orchestrates running the Spring Boot app together with a PostgreSQL database container.
 
+### ⚡Caching
+- Implemented Redis caching for all services (JobService, CompanyService, JobSeekerService, JobApplicationService).
+- Uses @Cacheable, @CachePut, and @CacheEvict annotations to improve performance and reduce database calls.
+
 ### 🧪 Testing & CI/CD
 
 Unit Tests:
@@ -76,7 +80,8 @@ CI/CD Integration:
 
 - Java + Spring Boot
 - Spring Data JPA + Hibernate
-- Spring Security + JWT Authentication 
+- Spring Security + JWT Authentication
+- Redis for caching and performance optimization
 - PostgreSQL (or MySQL – configurable)
 - Lombok for reducing boilerplate
 - Maven for build automation
@@ -87,8 +92,8 @@ CI/CD Integration:
 - Docker & Docker Compose
 
 
+
 ## 🔧 Planned Improvements
-### 🧠 Add caching mechanisms to boost performance
 ### 🐞 Fix minor gaps in job deletion, application logic, and error handling
 ### 🧹 Refactor and optimize code for better readability and maintainability
 ### ⚛️ Add frontend (React) in a short time
