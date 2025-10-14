@@ -58,6 +58,10 @@ Security is integrated using **Spring Security with JWT Authentication**, enabli
 - Implemented Redis caching for all services (JobService, CompanyService, JobSeekerService, JobApplicationService).
 - Uses @Cacheable, @CachePut, and @CacheEvict annotations to improve performance and reduce database calls.
 
+### 📄 Swagger Integration
+- Configured Swagger/OpenAPI for API documentation.
+- Added JWT Bearer token support to test secured endpoints directly from Swagger UI.
+
 ### 🧪 Testing & CI/CD
 
 Unit Tests:
@@ -81,6 +85,7 @@ CI/CD Integration:
 - Java + Spring Boot
 - Spring Data JPA + Hibernate
 - Spring Security + JWT Authentication
+- Swagger / OpenAPI for API documentation and testing
 - Redis for caching and performance optimization
 - PostgreSQL (or MySQL – configurable)
 - Lombok for reducing boilerplate
