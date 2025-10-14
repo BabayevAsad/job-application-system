@@ -25,21 +25,20 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/rest/api/auth/register", "/rest/api/auth/login").permitAll()
+                        .requestMatchers("/rest/api/auth/**", "/v3/api-docs/**", "/swagger-ui/**").permitAll()
                         .requestMatchers("/rest/api/company/**").hasRole("ADMIN")
                         .requestMatchers("/rest/api/job/**").hasRole("ADMIN")
-
                         .requestMatchers("/rest/api/jobSeeker/**").hasRole("MANAGER")
-
                         .requestMatchers("/rest/api/jobApplication/**").hasAnyRole("USER","ADMIN","MANAGER")
                         .anyRequest().authenticated()
                 );
+
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();

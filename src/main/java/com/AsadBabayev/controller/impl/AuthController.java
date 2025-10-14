@@ -29,6 +29,7 @@ public class AuthController {
         if(userRepository.findByUsername(user.getUsername()).isPresent()){
             return "Username already exists!";
         }
+        user.setId(null);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         if(user.getRole()==null){
